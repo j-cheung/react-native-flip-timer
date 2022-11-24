@@ -96,12 +96,8 @@
       ]
     },
     "ignore": [
-      "**/test/*.js"
+      "**/test/*.js",
+      "**/dist/*"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   }
 }

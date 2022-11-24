@@ -8,11 +8,17 @@ import NumberCard from './number-card';
 import style from '../style';
 
 function FlipNumber({
-  number, unit, size, perspective, numberWrapperStyle, cardStyle, flipCardStyle, numberStyle,
+  number, unit, size, perspective, numberWrapperStyle, cardStyle, flipCardStyle, numberStyle, direction = 'up', noHoursLimit,
 }) {
   number = parseInt(number);
-  let previousNumber = number - 1;
-  if (unit !== 'hours') {
+  let previousNumber = direction == 'down' ? number + 1 : number - 1;
+  if (direction == 'down') {
+    if (unit !== 'hours') {
+      previousNumber = previousNumber === 61 ? 0 : previousNumber;
+    } else if (!noHoursLimit) {
+      previousNumber = previousNumber === 24 ? 0 : previousNumber;
+    }
+  } else if (unit !== 'hours') {
     previousNumber = previousNumber === -1 ? 59 : previousNumber;
   } else {
     previousNumber = previousNumber === -1 ? 23 : previousNumber;
